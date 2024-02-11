@@ -129,7 +129,7 @@
         <div class="pull-right hidden-xs">
           <b>KOTA BENGKULU</b>
         </div>
-        <strong>Copyright &copy; 2023 <a href="">PEMINJAMAN BARANG POLTEKKES KEMENKES</a>.</strong> BENGKULU
+        <strong><a href="">PEMINJAMAN BARANG POLTEKKES KEMENKES</a>.</strong> BENGKULU
         reserved.
       </footer>
 
@@ -137,22 +137,16 @@
     <!-- ./wrapper -->
 
     <!-- jQuery 3 -->
-    <script src="{{ asset('assets/register/js/jquery.min.js') }}"></script>
+    <script src="{{ asset('assets/jquery/dist/jquery.min.js') }}"></script>
     <!-- Bootstrap 3.3.7 -->
-    <script src="{{ asset('assets/register/js/bootstrap.min.js') }}"></script>
-    <!-- SlimScroll -->
-
-    <!-- DataTables -->
+    <script src="{{ asset('assets/bootstrap/dist/js/bootstrap.min.js') }}"></script>
     <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js"></script>
     <script src="https://cdn.datatables.net/1.10.20/js/dataTables.bootstrap4.min.js"></script>
     <script src="https://cdn.datatables.net/responsive/2.2.3/js/dataTables.responsive.min.js"></script>
     <script src="https://cdn.datatables.net/responsive/2.2.3/js/responsive.bootstrap4.min.js"></script>
-    <!-- End Datatables -->
 
     <script src="{{ asset('assets/bower_components/jquery-slimscroll/jquery.slimscroll.min.js') }}"></script>
-    <!-- FastClick -->
     <script src="{{ asset('assets/bower_components/fastclick/lib/fastclick.js') }}"></script>
-    <!-- AdminLTE App -->
     <script src="{{ asset('assets/dist/js/adminlte.min.js') }}"></script>
 
     {{-- Toast Notification asset --}}
@@ -161,7 +155,7 @@
     {{-- Date & Time Picker --}}
     <script src="{{ asset('assets/timepicker/bootstrap-timepicker.min.js') }}"></script>
 
-    {{-- Font Awesome --}}bootstrap-datepicker.min.js
+    {{-- Font Awesome --}}
     <script src="https://kit.fontawesome.com/055120b175.js" crossorigin="anonymous"></script>
 
     {{-- select2 --}}

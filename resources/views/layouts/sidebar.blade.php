@@ -5,21 +5,23 @@
     </a>
 </li>
 
-{{-- <li class="header" style="font-weight:bold;">DATA STATISTIK SEKTORAL </li>
-<li class="treeview {{ set_active([
-    'luasWilayahDenganKetinggianTempat',
-    'luasWilayahPerKecamatan',
-]) }}">
-    <a href="#">
-        <i class="fa fa-check-square"></i> <span>Luas Wilayah Per</span>
-        <span class="pull-right-container">
-            <i class="fa fa-angle-left pull-right"></i>
-        </span>
+<li class="{{ set_active('barang') }}">
+    <a href="{{ route('barang') }}">
+        <i class="fa fa-satellite-dish"></i>
+        <span>Data Barang</span>
     </a>
-    <ul class="treeview-menu " style="padding-left:25px;">
-        <li class="{{ set_active(['luasWilayahDenganKetinggianTempat']) }}"><a href="{{ route('luasWilayahDenganKetinggianTempat') }}"><i class="fa fa-circle-o"></i>Ketinggian Tempat</a></li>
-        <li class="{{ set_active(['luasWilayahPerKecamatan']) }}"><a href="{{ route('luasWilayahPerKecamatan') }}"><i class="fa fa-circle-o"></i>Kecamatan</a></li>
-    </ul>
-</li> --}}
+</li>
 
+<li class="{{ set_active('peminjam') }}">
+    <a href="{{ route('peminjam') }}">
+        <i class="fa fa-clipboard-user"></i>
+        <span>Data Peminjam</span>
+    </a>
+</li>
 
+<li class="{{ set_active('user') }}">
+    <a href="{{ route('user') }}">
+        <i class="fa fa-user-secret"></i>
+        <span>Data User</span>
+    </a>
+</li>
