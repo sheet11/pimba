@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Validator;
 
 class UserController extends Controller
@@ -36,14 +37,27 @@ class UserController extends Controller
             return response()->json(['error'  =>  0, 'text'   =>  $validasi->errors()->first()],422);
         }
         // Buat entri baru
-        $simpan = User::create([
+        $attributes = [
             'name' => $request->name,
             'email' => $request->email,
-            'password' => bcrypt($request->password),
+            'password' => $request->password,
+        ];
 
-            // kalau passwor harus dikasih bcrypt untuk tidak menampilkan isi password di databes
+        if ($request->hasFile('tambah_foto') && $request->file('tambah_foto')->isValid()) {
+            $file = $request->file('tambah_foto');
+            $fileNameFoto = $file->store('tambah_fotos', 'public');
+            $attributes['tambah_foto'] = $fileNameFoto;
+        }
 
-        ]);
+        if ($request->hasFile('tambah_file') && $request->file('tambah_file')->isValid()) {
+            $file = $request->file('tambah_file');
+            $fileNameFile = $file->store('tambah_files', 'public');
+            $attributes['tambah_file'] = $fileNameFile;
+        }
+
+         // kalau passwor harus dikasih bcrypt untuk tidak menampilkan isi password di databes
+
+        $simpan = User::insert($attributes);
 
         if ($simpan) {
             return response()->json([
@@ -65,6 +79,8 @@ class UserController extends Controller
             'name'      =>  'required',
             'email'     =>  'required',
             'password'      =>  'required',
+            'tambah_foto'     =>   'file|mimes:jpeg,png,gif,webp',
+            'tambah_file'     =>  'file|mimes:pdf,doc,docx',
 
             //numeric itu harus angka dan required itu harus di isi
         ];
@@ -84,7 +100,7 @@ class UserController extends Controller
         $update = $user->update([
             'name' => $request->name,
             'email' => $request->email,
-            'password' => $request->password,
+            'password' => bcrypt($request->password),
         ]);
 
         if ($update) {
@@ -107,6 +123,20 @@ class UserController extends Controller
             ]);
         }else {
             return response()->json(['text' =>  'Gagal, data user gagal dihapus']);
+        }
+    }
+    public function downloadFile(User $user){
+        if ($user) {
+            $filePath = storage_path("app/public/{$user->tambah_file}");
+            if (Storage::disk('public')->exists("{$user->tambah_file}")) {
+                return response()->download($filePath);
+            } else {
+                // Handle file not found in storage
+                abort(404);
+            }
+        } else {
+            // Handle file record not found in the database
+            abort(404);
         }
     }
 }

@@ -1,7 +1,7 @@
 <div class="modal fade" id="modalEdit">
     <div class="modal-dialog">
         <div class="modal-content">
-            <form action="{{ route('user.update') }}" method="POST" class="form">
+            <form action="{{ route('user.update') }}" method="POST" class="form" enctype="multipart/form-data">
                 {{ csrf_field() }} {{ method_field('PATCH') }}
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
@@ -24,6 +24,14 @@
                             <label for="exampleInputEmail1">Password</label>
                             <input type="text" class="form-control" id="password_edit" name="password">
                         </div>
+                        {{--  <div class="form-group col-md-12">
+                            <label for="exampleInputEmail1">Tambah Foto</label>
+                            <input type="file" class="form-control" id="tambah_foto_edit" name="tambah_foto">
+                        </div>
+                        <div class="form-group col-md-12">
+                            <label for="exampleInputEmail1">Tambah File</label>
+                            <input type="file" class="form-control" id="tambah_file_edit" name="tambah_file">
+                        </div>  --}}
                     </div>
                 </div>
                 <div class="modal-footer">

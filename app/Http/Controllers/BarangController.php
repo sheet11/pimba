@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Barang;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Validator;
 
 class BarangController extends Controller
@@ -24,6 +25,8 @@ class BarangController extends Controller
             'kondisi_barang'      =>  'required',
             'merk_barang'     =>  'required',
             'jumlah_barang'      =>  'numeric|required',
+            'tambah_foto'     =>   'required|file|mimes:jpeg,png,gif,webp',
+            'tambah_file'     =>  'file|mimes:pdf,doc,docx',
 
             //numeric itu harus angka dan required itu harus di isi
         ];
@@ -37,15 +40,30 @@ class BarangController extends Controller
         if ($validasi->fails()) {
             return response()->json(['error'  =>  0, 'text'   =>  $validasi->errors()->first()],422);
         }
-        // Buat entri baru
-        $simpan = Barang::create([
+
+        $attributes = [
             'nama_barang' => $request->nama_barang,
             'kategori_barang' => $request->kategori_barang,
             'kondisi_barang' => $request->kondisi_barang,
             'merk_barang' => $request->merk_barang,
             'jumlah_barang' => $request->jumlah_barang,
+        ];
 
-        ]);
+        if ($request->hasFile('tambah_foto') && $request->file('tambah_foto')->isValid()) {
+            $file = $request->file('tambah_foto');
+            $fileNameFoto = $file->store('tambah_fotos', 'public');
+            $attributes['tambah_foto'] = $fileNameFoto;
+        }
+
+        if ($request->hasFile('tambah_file') && $request->file('tambah_file')->isValid()) {
+            $file = $request->file('tambah_file');
+            $fileNameFile = $file->store('tambah_files', 'public');
+            $attributes['tambah_file'] = $fileNameFile;
+        }
+
+
+        // Buat entri baru
+        $simpan = Barang::insert($attributes);
 
         if ($simpan) {
             return response()->json([
@@ -69,6 +87,8 @@ class BarangController extends Controller
             'kondisi_barang'      =>  'required',
             'merk_barang'     =>  'required',
             'jumlah_barang'      =>  'numeric|required',
+            'tambah_foto'     =>   'file|mimes:jpeg,png,gif,webp',
+            // 'tambah_file'     =>  'file|mimes:pdf,doc,docx',
 
             //numeric itu harus angka dan required itu harus di isi
         ];
@@ -83,15 +103,29 @@ class BarangController extends Controller
             return response()->json(['error'  =>  0, 'text'   =>  $validasi->errors()->first()],422);
         }
 
-        $barang = Barang::where('id',$request->barang_id)->first();
 
-        $update = $barang->update([
+
+        $attributes = [
             'nama_barang' => $request->nama_barang,
             'kategori_barang' => $request->kategori_barang,
             'kondisi_barang' => $request->kondisi_barang,
             'merk_barang' => $request->merk_barang,
             'jumlah_barang' => $request->jumlah_barang,
-        ]);
+        ];
+
+        if ($request->hasFile('tambah_foto') && $request->file('tambah_foto')->isValid()) {
+            $file = $request->file('tambah_foto');
+            $fileName = $file->store('tambah_fotos', 'public');
+            $attributes['tambah_foto'] = $fileName;
+        }
+
+        if ($request->hasFile('tambah_file') && $request->file('tambah_file')->isValid()) {
+            $file = $request->file('tambah_file');
+            $fileName = $file->store('tambah_files', 'public');
+            $attributes['tambah_file'] = $fileName;
+        }
+
+        $update = Barang::where('id',$request->barang_id)->update($attributes);
 
         if ($update) {
             return response()->json([
@@ -113,6 +147,21 @@ class BarangController extends Controller
             ]);
         }else {
             return response()->json(['text' =>  'Gagal, data barang gagal dihapus']);
+        }
+    }
+
+    public function downloadFile(Barang $barang){
+        if ($barang) {
+            $filePath = storage_path("app/public/{$barang->tambah_file}");
+            if (Storage::disk('public')->exists("{$barang->tambah_file}")) {
+                return response()->download($filePath);
+            } else {
+                // Handle file not found in storage
+                abort(404);
+            }
+        } else {
+            // Handle file record not found in the database
+            abort(404);
         }
     }
 }

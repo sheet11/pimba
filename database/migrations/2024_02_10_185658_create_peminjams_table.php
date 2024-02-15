@@ -15,6 +15,7 @@ class CreatePeminjamsTable extends Migration
     {
         Schema::create('peminjams', function (Blueprint $table) {
             $table->id();
+            $table->unsignedBigInteger('barang_id');
             $table->string('nama_peminjam');
             $table->string('unit_peminjaman');
             $table->date('tanggal_peminjaman');

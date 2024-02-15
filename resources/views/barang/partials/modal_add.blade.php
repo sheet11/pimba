@@ -1,7 +1,7 @@
 <div class="modal fade" id="modalTambah">
     <div class="modal-dialog">
         <div class="modal-content">
-            <form action="{{ route('barang.store') }}" method="POST" class="form">
+            <form action="{{ route('barang.store') }}" method="POST" class="form" enctype="multipart/form-data">
                 {{ csrf_field() }} {{ method_field('POST') }}
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
@@ -33,6 +33,14 @@
                             <label for="exampleInputEmail1">Jumlah Barang</label>
                             <input type="text" class="form-control" id="jumlah_barang" name="jumlah_barang">
                         </div>
+                        <div class="form-group col-md-12">
+                            <label for="exampleInputEmail1">Tambah Foto</label>
+                            <input type="file" class="form-control" id="tambah_foto" name="tambah_foto">
+                        </div>
+                        {{--  <div class="form-group col-md-12">
+                            <label for="exampleInputEmail1">Tambah File</label>
+                            <input type="file" class="form-control" id="tambah_file" name="tambah_file">
+                        </div>  --}}
                     </div>
                 </div>
                 <div class="modal-footer">

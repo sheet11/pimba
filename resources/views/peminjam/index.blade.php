@@ -15,6 +15,7 @@
                     <button type="button" class="btn btn-primary btn-sm btn-flat" data-toggle="modal" data-target="#modalTambah">
                         <i class="fa fa-plus"></i>&nbsp;Tambah Data
                     </button>
+                    <a target="_blank" href="{{ route('peminjam.download') }}" class="btn btn-success btn-sm btn-flat"><i class="fa fa-download"></i>&nbsp; Download Data Peminjaman</a>
                 </div>
             </div>
             <!-- /.box-header -->
@@ -30,6 +31,7 @@
                         <tr>
                             <th style="vertical-align:middle">No</th>
                             <th style="vertical-align:middle">Nama Peminjam</th>
+                            <th style="vertical-align:middle">Barang</th>
                             <th style="vertical-align:middle">Unit Peminjam</th>
                             <th style="vertical-align:middle">Tanggal Peminjam</th>
                             <th style="vertical-align:middle">Tanggal Pengembalian</th>
@@ -46,6 +48,7 @@
                             <tr>
                                 <td>{{ $index+1 }}</td>
                                 <td>{{ $peminjam->nama_peminjam }}</td>
+                                <td>{{ $peminjam->barang->nama_barang }}</td>
                                 <td>{{ $peminjam->unit_peminjaman }}</td>
                                 <td>{{ $peminjam->tanggal_peminjaman }}</td>
                                 <td>

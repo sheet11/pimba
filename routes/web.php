@@ -21,7 +21,7 @@ Route::get('/', function () {
     return view('auth/login');
 });
 
-Auth::routes(['register'=>false]);
+Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
@@ -31,6 +31,7 @@ Route::controller(BarangController::class)->middleware('auth')->prefix('/data_ba
     Route::get('/{barang}/edit', 'edit')->name('barang.edit');
     Route::patch('/update', 'update')->name('barang.update');
     Route::delete('/{barang}/delete', 'delete')->name('barang.delete');
+    Route::get('/{barang}/download_file', 'downloadfile')->name('barang.downloadFile');
 });
 
 Route::controller(UserController::class)->middleware('auth')->prefix('/data_user')->group(function(){
@@ -39,6 +40,8 @@ Route::controller(UserController::class)->middleware('auth')->prefix('/data_user
     Route::get('/{user}/edit', 'edit')->name('user.edit');
     Route::patch('/update', 'update')->name('user.update');
     Route::delete('/{user}/delete', 'delete')->name('user.delete');
+    Route::get('/{user}/download_file', 'downloadfile')->name('user.downloadFile');
+
 });
 
 Route::controller(PeminjamController::class)->middleware('auth')->prefix('/data_peminjam')->group(function(){
@@ -48,5 +51,6 @@ Route::controller(PeminjamController::class)->middleware('auth')->prefix('/data_
     Route::patch('/pengembalian', 'pengembalian')->name('peminjam.pengembalian');
     Route::patch('/update', 'update')->name('peminjam.update');
     Route::delete('/{peminjam}/delete', 'delete')->name('peminjam.delete');
+    Route::get('/download', 'download')->name('peminjam.download');
 });
 // samping get barang itu variabel kalau di name itu namanya url harus sama di profix

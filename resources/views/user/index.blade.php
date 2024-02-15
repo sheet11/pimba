@@ -31,6 +31,8 @@
                             <th style="vertical-align:middle">No</th>
                             <th style="vertical-align:middle">Name</th>
                             <th style="vertical-align:middle">Email</th>
+                            {{--  <th style="vertical-align:middle">Tambah Foto</th>
+                            <th style="vertical-align:middle">Tambah File</th>  --}}
                             <th style="vertical-align:middle">Aksi</th>
                         </tr>
                     </thead>
@@ -43,6 +45,12 @@
                                 <td>{{ $index+1 }}</td>
                                 <td>{{ $user->name }}</td>
                                 <td>{{ $user->email }}</td>
+                                {{--  <td>
+                                     <img src="{{ Storage::url($user->tambah_foto) }}" height="100" alt="">
+                                </td>
+                                <td>
+                                    <a href="{{ route('user.downloadFile',[$user->id]) }}" class="btn btn-primary btn-sm btn-flat"><i class="fa fa-download"></i>&nbsp; Download</a>
+                                </td>  --}}
                                 <td>
                                     <table>
                                         <tr>

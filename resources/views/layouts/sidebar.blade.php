@@ -18,10 +18,27 @@
         <span>Data Peminjam</span>
     </a>
 </li>
+<li class="{{ set_active('peminjam.download') }}">
+    <a target="_blank" href="{{ route('peminjam.download') }}">
+        <i class="fa fa-download"></i>
+        <span>Download Data Peminjam</span>
+    </a>
+</li>
 
 <li class="{{ set_active('user') }}">
     <a href="{{ route('user') }}">
         <i class="fa fa-user-secret"></i>
         <span>Data User</span>
     </a>
+</li>
+
+<li>
+    <a class="dropdown-item" href="{{ route('logout') }}"
+        onclick="event.preventDefault();
+                        document.getElementById('logout-form').submit();">
+        <i class="fa fa-sign-out text-danger"></i>{{__('Logout') }}
+    </a>
+    <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+        @csrf
+    </form>
 </li>

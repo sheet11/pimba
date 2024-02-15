@@ -15,6 +15,14 @@
                             <input type="text" class="form-control" id="nama_peminjam" name="nama_peminjam">
                         </div>
                         <div class="form-group col-md-12">
+                            <label for="exampleInputEmail1">Barang</label>
+                            <select name="barang_id" class="form-control" id="barang_id">
+                                @foreach ($barangs as $barang)
+                                    <option value="{{ $barang->id }}">{{ $barang->nama_barang }}</option>
+                                @endforeach
+                            </select>
+                        </div>
+                        <div class="form-group col-md-12">
                             <label for="exampleInputEmail1">Unit Peminjam</label>
                             <input type="text" class="form-control" id="unit_peminjaman" name="unit_peminjaman">
                         </div>

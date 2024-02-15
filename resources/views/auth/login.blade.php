@@ -3,7 +3,7 @@
 	<head>
 		<meta charset="utf-8">
         <title>PIMBA POLTEKKES</title>
-        <link rel="shortcut icon" href="{{ asset('assets/images/logo.png') }}">
+        <link rel="shortcut icon" href="{{ asset('assets/images/logo1.png') }}">
         <link href="{{ asset('assets/vendors/bootstrap/dist/css/bootstrap.min.css') }}" rel="stylesheet">
         <link rel="stylesheet" href=" {{ asset('css/style_login.css') }} ">
         <link href="{{ asset('assets/vendors/font-awesome/css/font-awesome.min.css') }}" rel="stylesheet">

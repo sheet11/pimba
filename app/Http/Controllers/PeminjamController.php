@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use Barryvdh\DomPDF\Facade\Pdf;
+use App\Models\Barang;
 use App\Models\Peminjam;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
@@ -9,10 +11,12 @@ use Illuminate\Support\Facades\Validator;
 class PeminjamController extends Controller
 {
     public function index(){
+        $barangs = Barang::all();
         $peminjams = Peminjam::orderBy('created_at', 'desc')
                                 ->get();
         return view('peminjam.index',[
             'peminjams' =>  $peminjams,
+            'barangs' =>  $barangs,
         ]);
     }
 
@@ -25,6 +29,7 @@ class PeminjamController extends Controller
             // 'tanggal_pengembalian'     =>  'required',
             'lama_minjam'      =>  'required',
             'status_minjam'      =>  'required',
+            'barang_id'      =>  'required',
 
             //numeric itu harus angka dan required itu harus di isi
         ];
@@ -46,6 +51,7 @@ class PeminjamController extends Controller
             // 'tanggal_pengembalian' => $request->tanggal_pengembalian,
             'lama_minjam' => $request->lama_minjam,
             'status_minjam' => $request->status_minjam,
+            'barang_id' => $request->barang_id,
 
         ]);
 
@@ -72,6 +78,8 @@ class PeminjamController extends Controller
             // 'tanggal_pengembalian'     =>  'required',
             'lama_minjam'      =>  'required',
             'status_minjam'      =>  'required',
+            'barang_id'      =>  'required',
+
 
             //numeric itu harus angka dan required itu harus di isi
         ];
@@ -95,6 +103,8 @@ class PeminjamController extends Controller
             // 'tanggal_pengembalian' => $request->tanggal_pengembalian,
             'lama_minjam' => $request->lama_minjam,
             'status_minjam' => $request->status_minjam,
+            'barang_id' => $request->barang_id,
+
         ]);
 
         if ($update) {
@@ -153,5 +163,24 @@ class PeminjamController extends Controller
         }else {
             return response()->json(['text' =>  'Gagal, data peminjam gagal dihapus']);
         }
+    }
+
+    public function download(){
+        $peminjams = Peminjam::with(['barang'])->get();
+        $hari = date('d');
+        $bulan= date('m');
+        $tahun = date('Y');
+
+        $tanggal = [
+            'hari' => $hari,
+            'bulan' => $bulan,
+            'tahun' => $tahun,
+        ];
+        $pdf = Pdf::loadView('peminjam.download',[
+            'peminjams' =>  $peminjams,
+            'tanggal' =>  $tanggal
+        ]);
+        $pdf->setPaper('a4','portrait');
+        return $pdf->stream('laporan_peminjaman' . \Carbon\Carbon::now() . '.pdf');
     }
 }

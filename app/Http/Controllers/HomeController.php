@@ -2,6 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Barang;
+use App\Models\Peminjam;
+use App\Models\User;
 use Illuminate\Http\Request;
 
 class HomeController extends Controller
@@ -23,6 +26,9 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('dashboard');
+        $barang = Barang::count();
+        $peminjam = Peminjam::count();
+        $user = User::count();
+        return view('dashboard',compact('barang','peminjam','user'));
     }
 }

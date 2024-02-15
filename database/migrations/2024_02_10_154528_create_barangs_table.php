@@ -20,6 +20,8 @@ class CreateBarangsTable extends Migration
             $table->string('kondisi_barang');
             $table->string('merk_barang');
             $table->integer('jumlah_barang');
+            $table->string('tambah_foto');
+            // $table->string('tambah_file');
             $table->timestamps();
 
             // code integer untuk angka, code string untuk huruf

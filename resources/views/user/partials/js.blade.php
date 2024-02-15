@@ -69,6 +69,8 @@
                     $('#name_edit').val(data.name);
                     $('#email_edit').val(data.email);
                     $('#password_edit').val(data.password);
+                    $('#tambah_foto_edit').val(data.tambah_foto);
+                    $('#tambah_file_edit').val(data.tambah_file);
                 },
                 error:function(){
                     $('#gagal').show(100);

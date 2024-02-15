@@ -78,6 +78,7 @@
                     $('#tanggal_pengembalian_edit').val(data.tanggal_pengembalian);
                     $('#lama_minjam_edit').val(data.lama_minjam);
                     $('#status_minjam_edit').val(data.status_minjam);
+                    $('#barang_id_edit').val(data.barang_id);
                 },
                 error:function(){
                     $('#gagal').show(100);

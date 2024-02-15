@@ -17,6 +17,14 @@
                             <input type="text" class="form-control" id="nama_peminjam_edit" name="nama_peminjam">
                         </div>
                         <div class="form-group col-md-12">
+                            <label for="exampleInputEmail1">Barang</label>
+                            <select name="barang_id" class="form-control" id="barang_id_edit">
+                                @foreach ($barangs as $barang)
+                                    <option value="{{ $barang->id }}">{{ $barang->nama_barang }}</option>
+                                @endforeach
+                            </select>
+                        </div>
+                        <div class="form-group col-md-12">
                             <label for="exampleInputEmail1">Unit Peminjam</label>
                             <input type="text" class="form-control" id="unit_peminjaman_edit" name="unit_peminjaman">
                         </div>
@@ -34,7 +42,7 @@
                         </div>
                         <div class="form-group col-md-12">
                             <label for="exampleInputEmail1">Status Minjam</label>
-                            <select name="status_minjam" class="form-control" id="status_minjam">
+                            <select name="status_minjam" class="form-control" id="status_minjam_edit">
                                 <option value="masih_dipinjam">Masih Dipinjam</option>
                                 <option value="sudah_dikembalikan">Sudah Dikembalikan</option>
                             </select>

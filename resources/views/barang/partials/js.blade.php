@@ -71,6 +71,8 @@
                     $('#kondisi_barang_edit').val(data.kondisi_barang);
                     $('#merk_barang_edit').val(data.merk_barang);
                     $('#jumlah_barang_edit').val(data.jumlah_barang);
+                    $('#tambah_foto_edit').val(data.tambah_foto);
+                   // $('#tambah_file_edit').val(data.tambah_file);
                 },
                 error:function(){
                     $('#gagal').show(100);

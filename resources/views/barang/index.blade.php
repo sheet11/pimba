@@ -34,6 +34,8 @@
                             <th style="vertical-align:middle">Kondisi Barang</th>
                             <th style="vertical-align:middle">Merk Barang</th>
                             <th style="vertical-align:middle">Jumlah Barang</th>
+                            <th style="vertical-align:middle">Tambah Foto</th>
+                            {{--  <th style="vertical-align:middle">Tambah File</th>  --}}
                             <th style="vertical-align:middle">Aksi</th>
                         </tr>
                     </thead>
@@ -49,6 +51,14 @@
                                 <td>{{ $barang->kondisi_barang }}</td>
                                 <td>{{ $barang->merk_barang }}</td>
                                 <td>{{ $barang->jumlah_barang }}</td>
+                                <td>
+                                    <img src="{{ Storage::url($barang->tambah_foto) }}" height="100" alt="">
+                                </td>
+                                {{--  <td>
+                                    <td>
+                                        <a href="{{ route('barang.downloadFile',[$barang->id]) }}" class="btn btn-primary btn-sm btn-flat"><i class="fa fa-download"></i>&nbsp; Download</a>
+                                    </td>
+                                </td>  --}}
                                 <td>
                                     <table>
                                         <tr>

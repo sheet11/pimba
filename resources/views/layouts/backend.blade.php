@@ -72,6 +72,29 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
           </a>
+          <div class="navbar-custom-menu">
+            <ul class="nav navbar-nav">
+              <li class="dropdown user user-menu">
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown" style="text-transform: uppercase">
+                    <i class="fa fa-user"></i>
+                    <span class="hidden-xs">
+                        @yield('user-login')
+                    </span>
+                </a>
+              </li>
+              <!-- Control Sidebar Toggle Button -->
+              <li style="background:#dc3545;">
+                  <a data-toggle="control-sidebar" href="{{ route('logout') }}"
+                      onclick="event.preventDefault();
+                                      document.getElementById('logout-form').submit();">
+                      <i class="fa fa-sign-out"></i>&nbsp; {{ __('Logout') }}
+                  </a>
+                  <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                      @csrf
+                  </form>
+              </li>
+            </ul>
+          </div>
         </nav>
       </header>
 
