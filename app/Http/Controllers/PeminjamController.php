@@ -12,8 +12,12 @@ class PeminjamController extends Controller
 {
     public function index(){
         $barangs = Barang::all();
-        $peminjams = Peminjam::orderBy('created_at', 'desc')
-                                ->get();
+        // $peminjams = Peminjam::whereHas('barang', function ($query) {
+        // $query->whereNull('deleted_at'); // Memastikan bahwa barang belum dihapus secara lunak
+        // })->get();
+        $peminjams = Peminjam::with(['barang' => function ($query) {
+        $query->withTrashed(); // Menyertakan data barang yang telah dihapus secara lunak
+        }])->get();
         return view('peminjam.index',[
             'peminjams' =>  $peminjams,
             'barangs' =>  $barangs,
@@ -166,7 +170,12 @@ class PeminjamController extends Controller
     }
 
     public function download(){
-        $peminjams = Peminjam::with(['barang'])->get();
+        // $peminjams = Peminjam::whereHas('barang', function ($query) {
+        // $query->whereNull('deleted_at'); // Memastikan bahwa barang belum dihapus secara lunak
+        // })->get();
+        $peminjams = Peminjam::with(['barang' => function ($query) {
+        $query->withTrashed(); // Menyertakan data barang yang telah dihapus secara lunak
+        }])->get();
         $hari = date('d');
         $bulan= date('m');
         $tahun = date('Y');
