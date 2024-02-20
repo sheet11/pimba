@@ -40,20 +40,20 @@ class UserController extends Controller
         $attributes = [
             'name' => $request->name,
             'email' => $request->email,
-            'password' => $request->password,
+            'password' => bcrypt($request->password),
         ];
 
-        if ($request->hasFile('tambah_foto') && $request->file('tambah_foto')->isValid()) {
-            $file = $request->file('tambah_foto');
-            $fileNameFoto = $file->store('tambah_fotos', 'public');
-            $attributes['tambah_foto'] = $fileNameFoto;
-        }
+        // if ($request->hasFile('tambah_foto') && $request->file('tambah_foto')->isValid()) {
+        //     $file = $request->file('tambah_foto');
+        //     $fileNameFoto = $file->store('tambah_fotos', 'public');
+        //     $attributes['tambah_foto'] = $fileNameFoto;
+        // }
 
-        if ($request->hasFile('tambah_file') && $request->file('tambah_file')->isValid()) {
-            $file = $request->file('tambah_file');
-            $fileNameFile = $file->store('tambah_files', 'public');
-            $attributes['tambah_file'] = $fileNameFile;
-        }
+        // if ($request->hasFile('tambah_file') && $request->file('tambah_file')->isValid()) {
+        //     $file = $request->file('tambah_file');
+        //     $fileNameFile = $file->store('tambah_files', 'public');
+        //     $attributes['tambah_file'] = $fileNameFile;
+        // }
 
          // kalau passwor harus dikasih bcrypt untuk tidak menampilkan isi password di databes
 
