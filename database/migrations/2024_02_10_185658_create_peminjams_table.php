@@ -23,6 +23,7 @@ class CreatePeminjamsTable extends Migration
             $table->string('lama_minjam');
             $table->string('status_minjam');
             $table->timestamps();
+            $table->foreign('barang_id')->references('id')->on('barangs')->onDelete('cascade');
         });
     }
 

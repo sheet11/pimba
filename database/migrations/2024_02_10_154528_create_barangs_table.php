@@ -23,6 +23,7 @@ class CreateBarangsTable extends Migration
             $table->string('tambah_foto');
             // $table->string('tambah_file');
             $table->timestamps();
+            $table->softDeletes();
 
             // code integer untuk angka, code string untuk huruf
         });
