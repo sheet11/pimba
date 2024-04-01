@@ -15,6 +15,6 @@ class Peminjam extends Model
 
     public function barang()
     {
-        return $this->belongsTo(barang::class);
+        return $this->belongsTo(Barang::class);
     }
 }
